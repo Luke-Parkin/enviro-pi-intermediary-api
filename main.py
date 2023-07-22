@@ -15,13 +15,18 @@ AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 
 @app.route("/", methods = ['POST'])
 def enviro():
-    if request.headers.get("Authorization") == f"Bearer {AUTH_TOKEN}":
-        data = request.json
-        ref.push(data)
-        return "success",200
-    else:
-        return "unauthorised",401
-    
+    try:
+        print(request.headers.get("Authorization"))
+        if request.headers.get("Authorization") == f"Bearer {AUTH_TOKEN}":
+            data = request.json
+            ref.push(data)
+            return "success",200
+        else:
+            return "unauthorised",401
+    except Exception as e:
+        print("Error",e)
+        abort(400)
+        
     
 if __name__ == '__main__':
     app.run(threaded=True, port=80)
