@@ -7,7 +7,7 @@ from firebase_admin import db
 
 app = Flask(__name__)
 
-cred = firebase_admin.credentials.Certificate(os.environ.get(json.loads("FIREBASEADMIN")))
+cred = firebase_admin.credentials.Certificate(json.loads(os.environ.get("FIREBASEADMIN")))
 firebase_admin.initialize_app(cred, {"databaseURL":"https://enviro-pi-logger-default-rtdb.firebaseio.com/"})
 ref = db.reference()
 
