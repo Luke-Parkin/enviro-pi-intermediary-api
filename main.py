@@ -21,3 +21,7 @@ def enviro():
         return "success",200
     else:
         return "unauthorised",401
+    
+    
+if __name__ == '__main__':
+    app.run(threaded=True, port=80)
