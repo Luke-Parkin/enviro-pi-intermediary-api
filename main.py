@@ -16,7 +16,8 @@ AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 @app.route("/", methods = ['POST'])
 def enviro():
     try:
-        if request.headers.get("Authorization") == f"Bearer {AUTH_TOKEN}":
+        auth = request.authorization
+        if auth.password == AUTH_TOKEN:
             data = request.json
             ref.push(data)
             return "success",200
