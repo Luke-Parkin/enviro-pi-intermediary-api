@@ -15,13 +15,6 @@ ref = db.reference()
 
 AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 
-def ping_server():
-    try:
-        url = "https://agile-assets.onrender.com/dashboard/"
-        response = requests.get(url)
-    except:
-        print("Failed to reach agile website")
-
 @app.route("/", methods = ['POST'])
 def enviro():
     try:
@@ -29,7 +22,6 @@ def enviro():
         if auth.password == AUTH_TOKEN:
             data = request.json
             ref.push(data)
-            ping_server() 
             return "success",200
         else:
             return "unauthorised",401
